@@ -1,0 +1,667 @@
+<!doctype html>
+<html class="no-js" lang="de">
+    <head>
+        <!-- title -->
+        <title>Chiropraktiker Lörrach - Chiropraktik Chirofamily Amerikanische Methode</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+        <meta name="author" content="Chiropraktiker Lörrach Rheinfelden Dr.med. Burak Esendal">
+        <!-- description -->
+        <meta name="description" content="Chiropraktiker Lörrach: Wir wollen, dass Du ein neues Körpergefühl bekommst und wieder so leben kannst, wie Du Dir das vorstellst... ">
+        <!-- keywords -->
+        <meta name="keywords" lang="de" content="Chiropraktiker Lörrach, Chiropraktiker Basel">
+		<link rel="canonical" href="https://www.chirofamily.de">
+		<meta name="robots" content="all" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="img/favicon.png">
+        <!-- animation -->
+        <link rel="stylesheet" href="css/animate.css" />
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <!-- et line icon -->
+        <link rel="stylesheet" href="css/et-line-icons.css" />
+        <!-- font-awesome icon -->
+        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <!-- themify icon -->
+        <link rel="stylesheet" href="css/themify-icons.css">
+        <!-- swiper carousel -->
+        <link rel="stylesheet" href="css/swiper.min.css">
+        <!-- justified gallery  -->
+        <link rel="stylesheet" href="css/justified-gallery.min.css">
+        <!-- magnific popup -->
+        <link rel="stylesheet" href="css/magnific-popup.css" />
+        <!-- revolution slider -->
+        <link rel="stylesheet" type="text/css" href="revolution/css/settings.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">
+        <link rel="stylesheet" type="text/css" href="revolution/css/navigation.css">
+        <!-- bootsnav -->
+        <link rel="stylesheet" href="css/bootsnav.css">
+        <!-- style -->
+        <link rel="stylesheet" href="css/style.css" />
+        <!-- responsive css -->
+        <link rel="stylesheet" href="css/responsive.css" />
+        <!--[if IE]>
+            <script src="js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Laufschrift-->
+        <script>
+        /**
+        * author Remy Sharp
+        * url http://remysharp.com/tag/marquee
+        */
+
+        (function ($) {
+            $.fn.marquee = function (klass) {
+                var newMarquee = [],
+                    last = this.length;
+
+                // works out the left or right hand reset position, based on scroll
+                // behavior, current direction and new direction
+                function getReset(newDir, marqueeRedux, marqueeState) {
+                    var behavior = marqueeState.behavior, width = marqueeState.width, dir = marqueeState.dir;
+                    var r = 0;
+                    if (behavior == 'alternate') {
+                        r = newDir == 1 ? marqueeRedux[marqueeState.widthAxis] - (width*2) : width;
+                    } else if (behavior == 'slide') {
+                        if (newDir == -1) {
+                            r = dir == -1 ? marqueeRedux[marqueeState.widthAxis] : width;
+                        } else {
+                            r = dir == -1 ? marqueeRedux[marqueeState.widthAxis] - (width*2) : 0;
+                        }
+                    } else {
+                        r = newDir == -1 ? marqueeRedux[marqueeState.widthAxis] : 0;
+                    }
+                    return r;
+                }
+
+                // single "thread" animation
+                function animateMarquee() {
+                    var i = newMarquee.length,
+                        marqueeRedux = null,
+                        $marqueeRedux = null,
+                        marqueeState = {},
+                        newMarqueeList = [],
+                        hitedge = false;
+
+                    while (i--) {
+                        marqueeRedux = newMarquee[i];
+                        $marqueeRedux = $(marqueeRedux);
+                        marqueeState = $marqueeRedux.data('marqueeState');
+
+                        if ($marqueeRedux.data('paused') !== true) {
+                            // TODO read scrollamount, dir, behavior, loops and last from data
+                            marqueeRedux[marqueeState.axis] += (marqueeState.scrollamount * marqueeState.dir);
+
+                            // only true if it's hit the end
+                            hitedge = marqueeState.dir == -1 ? marqueeRedux[marqueeState.axis] <= getReset(marqueeState.dir * -1, marqueeRedux, marqueeState) : marqueeRedux[marqueeState.axis] >= getReset(marqueeState.dir * -1, marqueeRedux, marqueeState);
+
+                            if ((marqueeState.behavior == 'scroll' && marqueeState.last == marqueeRedux[marqueeState.axis]) || (marqueeState.behavior == 'alternate' && hitedge && marqueeState.last != -1) || (marqueeState.behavior == 'slide' && hitedge && marqueeState.last != -1)) {
+                                if (marqueeState.behavior == 'alternate') {
+                                    marqueeState.dir *= -1; // flip
+                                }
+                                marqueeState.last = -1;
+
+                                $marqueeRedux.trigger('stop');
+
+                                marqueeState.loops--;
+                                if (marqueeState.loops === 0) {
+                                    if (marqueeState.behavior != 'slide') {
+                                        marqueeRedux[marqueeState.axis] = getReset(marqueeState.dir, marqueeRedux, marqueeState);
+                                    } else {
+                                        // corrects the position
+                                        marqueeRedux[marqueeState.axis] = getReset(marqueeState.dir * -1, marqueeRedux, marqueeState);
+                                    }
+
+                                    $marqueeRedux.trigger('end');
+                                } else {
+                                    // keep this marquee going
+                                    newMarqueeList.push(marqueeRedux);
+                                    $marqueeRedux.trigger('start');
+                                    marqueeRedux[marqueeState.axis] = getReset(marqueeState.dir, marqueeRedux, marqueeState);
+                                }
+                            } else {
+                                newMarqueeList.push(marqueeRedux);
+                            }
+                            marqueeState.last = marqueeRedux[marqueeState.axis];
+
+                            // store updated state only if we ran an animation
+                            $marqueeRedux.data('marqueeState', marqueeState);
+                        } else {
+                            // even though it's paused, keep it in the list
+                            newMarqueeList.push(marqueeRedux);
+                        }
+                    }
+
+                    newMarquee = newMarqueeList;
+
+                    if (newMarquee.length) {
+                        setTimeout(animateMarquee, 25);
+                    }
+                }
+
+                // TODO consider whether using .html() in the wrapping process could lead to loosing predefined events...
+                this.each(function (i) {
+                    var $marquee = $(this),
+                        width = $marquee.attr('width') || $marquee.width(),
+                        height = $marquee.attr('height') || $marquee.height(),
+                        $marqueeRedux = $marquee.after('<div ' + (klass ? 'class="' + klass + '" ' : '') + 'style="display: block-inline; width: ' + width + 'px; height: ' + height + 'px; overflow: hidden;"><div style="float: left; white-space: nowrap;">' + $marquee.html() + '</div></div>').next(),
+                        marqueeRedux = $marqueeRedux.get(0),
+                        hitedge = 0,
+                        direction = ($marquee.attr('direction') || 'left').toLowerCase(),
+                        marqueeState = {
+                            dir : /down|right/.test(direction) ? -1 : 1,
+                            axis : /left|right/.test(direction) ? 'scrollLeft' : 'scrollTop',
+                            widthAxis : /left|right/.test(direction) ? 'scrollWidth' : 'scrollHeight',
+                            last : -1,
+                            loops : $marquee.attr('loop') || -1,
+                            scrollamount : $marquee.attr('scrollamount') || this.scrollAmount || 2,
+                            behavior : ($marquee.attr('behavior') || 'scroll').toLowerCase(),
+                            width : /left|right/.test(direction) ? width : height
+                        };
+
+                    // corrects a bug in Firefox - the default loops for slide is -1
+                    if ($marquee.attr('loop') == -1 && marqueeState.behavior == 'slide') {
+                        marqueeState.loops = 1;
+                    }
+
+                    $marquee.remove();
+
+                    // add padding
+                    if (/left|right/.test(direction)) {
+                        $marqueeRedux.find('> div').css('padding', '0 ' + width + 'px');
+                    } else {
+                        $marqueeRedux.find('> div').css('padding', height + 'px 0');
+                    }
+
+                    // events
+                    $marqueeRedux.bind('stop', function () {
+                        $marqueeRedux.data('paused', true);
+                    }).bind('pause', function () {
+                        $marqueeRedux.data('paused', true);
+                    }).bind('start', function () {
+                        $marqueeRedux.data('paused', false);
+                    }).bind('unpause', function () {
+                        $marqueeRedux.data('paused', false);
+                    }).data('marqueeState', marqueeState); // finally: store the state
+
+                    // todo - rerender event allowing us to do an ajax hit and redraw the marquee
+
+                    newMarquee.push(marqueeRedux);
+
+                    marqueeRedux[marqueeState.axis] = getReset(marqueeState.dir, marqueeRedux, marqueeState);
+                    $marqueeRedux.trigger('start');
+
+                    // on the very last marquee, trigger the animation
+                    if (i+1 == last) {
+                        animateMarquee();
+                    }
+                });
+
+                return $(newMarquee);
+            };
+        }(jQuery));
+        </script>
+
+        <script type="text/javascript">
+           
+            $(function () {
+                // basic version is: $('div.demo marquee').marquee() - but we're doing some sexy extras
+
+                $('div.demo marquee').marquee('pointer').mouseover(function () {
+                    $(this).trigger('stop');
+                }).mouseout(function () {
+                    $(this).trigger('start');
+                }).mousemove(function (event) {
+                    if ($(this).data('drag') == true) {
+                        this.scrollLeft = $(this).data('scrollX') + ($(this).data('x') - event.clientX);
+                    }
+                }).mousedown(function (event) {
+                    $(this).data('drag', true).data('x', event.clientX).data('scrollX', this.scrollLeft);
+                }).mouseup(function () {
+                    $(this).data('drag', false);
+                });
+            });
+            //-->
+        </script>
+        <!-- end Laufschrift -->
+
+        <!-- eMail encryption -->
+        <!--<script> 
+            function UnCryptMailto(s, shift) {
+	           var n=0;
+	           var r="";
+	           for(var i=0;i<s.length;i++) {
+		          n=s.charCodeAt(i);
+		          if (n>=8364) {n = 128;}
+		          r += String.fromCharCode(n-(shift));
+	           }
+	           return r;
+            }
+            function linkTo_UnCryptMailto(s, shift)	{
+	           location.href=UnCryptMailto(s, shift);
+            }
+            </script>
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+            <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+
+            <script>
+            function loadGAonConsent(){
+              window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+              ga('create', 'UA-119116774-1', 'auto');
+              ga('set', 'anonymizeIp', true);
+              ga('send', 'pageview');
+              var gascript = document.createElement("script");
+              gascript.async = true;
+              gascript.src = "https://www.google-analytics.com/analytics.js";
+              document.getElementsByTagName("head")[0].appendChild(gascript, document.getElementsByTagName("head")[0]);
+            }
+
+            if (document.cookie.split(';').filter(function(item) {
+                return item.indexOf('cookieconsent_status=allow') >= 0
+            }).length) {
+                loadGAonConsent();
+            }
+
+            window.addEventListener("load", function(){
+            	window.cookieconsent.initialise({
+                "palette": {
+      "popup": {
+        "background": "#eaf7f7",
+        "text": "#5c7291"
+      },
+      "button": {
+        "background": "#56cbdb",
+        "text": "#ffffff"
+      }
+            		},
+            		"theme": "classic",
+            		"type": "opt-in",
+            		"content": {
+            			"message": "Wir nutzen Cookies und Google Analytics, um diese Website für Sie so interessant wie möglich zu gestalten. Sind Sie damit einverstanden? (Sie können diese Entscheidung jederzeit widerrufen)",
+            			"deny": "Ablehnen",
+            			"allow": "OK, gerne!",
+            			"link": "Datenschutzerklärung",
+            			"href": "datenschutzerklaerung.html"
+            		},
+            		onStatusChange: function(status, chosenBefore) {
+            			var type = this.options.type;
+            			var didConsent = this.hasConsented();
+            			if (type == 'opt-in' && didConsent) {
+            				// enable cookies
+            				loadGAonConsent();
+            			}
+            		}
+            	})
+            });
+            </script>-->
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=UA-201332100-2"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-201332100-2');
+		</script>
+
+
+    </head>
+    <body>
+
+        <!-- start header -->
+        <header>
+
+            <!-- start navigation -->
+            <nav class="navbar navbar-default bootsnav navbar-fixed-top header-light bg-white nav-box-width">
+                <div class="container nav-header-container">
+                    <div class="row">
+                        <!-- start logo -->
+                        <div class="col-md-2 col-xs-5">
+                            <a href="index.html" title="CHIROfamily" class="logo"><img src="img/Logo-space.png" data-at2x="./img/Logo-space.png" class="logo-dark" alt="CHIROfamily"><img src="img/Logo-space.png" data-at2x="./img/Logo-space.png" alt="CHIROfamily" class="logo-light default"></a>
+                        </div>
+                        <!-- end logo -->
+                        <div class="col-md-7 col-xs-2 width-auto pull-right accordion-menu">
+                            <button type="button" class="navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#navbar-collapse-toggle-1">
+                                <span class="sr-only">toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="navbar-collapse collapse pull-right" id="navbar-collapse-toggle-1">
+                                <ul class="nav navbar-nav navbar-left panel-group no-margin alt-font font-weight-700">
+                                    <li><a href="#top" title="Startseite" class="inner-link active">Startseite</a></li>
+                                    <li><a href="ichkannhelfen.html" title="Chiropraktik">Kann ich Dir helfen?</a></li>
+                                    <li><a href="esendal.html" title="Wer ich bin">Wer ich bin</a></li>
+                                    <li><a href="mailto:praxis@chirofamily.de?subject=Terminanfrage%20Praxis%20CHIROfamily&amp;body=Bitte%20trage%20Deinen%20Namen%20und%20den%20gewünschten%20Termin%20ein:%0D%0A%0D%0AName:%20%20%0D%0ATermin:%20%20" title="Termin">Termin</a></li>
+                                    <li><a href="kontakt.html" title="Kontakt und Anfahrt">Kontakt &amp; Anfahrt</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  flags -->
+                       <div class="languages">  <a href="en/index.html" title="English Version"><img src="img/english.jpg" data-at2x="./img/english.jpg" class="flags" alt="english"></a>
+                      <!-- a href="./fr/index.html" title="French"><img src="./img/french.jpg" data-at2x="./img/french.jpg" class="flags" alt="french"></a -->
+</div>
+<!-- end flags -->
+            </nav>
+            <!-- end navigation -->
+
+        </header>
+        <!-- end header -->
+        <!-- start slider -->
+        <section class="wow fadeIn cover-background background-position-top top-space" style="background-image:url('images/Startseite_Chirofamily_Burak_Esendal-Edit.jpg');" id="home">
+            <div class="opacity-light"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 display-table page-title-large">
+                        <div class="display-table-cell vertical-align-middle text-center padding-30px-tb">
+                            <!-- start sub title -->
+                            <span class="display-block text-white opacity6 width-45 sm-width-100 center-col margin-5px-bottom"></span>
+                            <!-- end sub title -->
+                            <!-- start page title -->
+                            <h1 class="alt-font text-white font-weight-500 no-margin-bottom">&nbsp;<br>&nbsp;<br>&nbsp;<br><br>&nbsp;<br><span class="text-small text-extra-light-gray"></span><br>&nbsp;</h1>
+                            <!-- end page title -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- end slider -->
+
+
+
+        <!-- start mission statement section -->
+        <section style="padding-bottom: 0!important;" class="wow fadeIn padding-60px-tb sm-padding-40px-tb">
+            <div class="container">
+                <div class="row">
+                    <!-- start column -->
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6"></div>
+                    <div class="col-md-12 margin-40px-bottom">
+                        <div class="col-md-8 col-sm-12 col-sx-12">
+                            <div class="text_inner"><h1>Chiropraktiker Lörrach</h1>
+                                <p class="text-title">Finde zu Dir selbst</p></div>
+                            <div class="bg-white l no-padding-top xs-padding-30px-all last-paragraph-no-margin text-large text-extra-dark-gray sans-font">
+                                <p>Dein Weg zu mehr Lebendigkeit ist unser oberstes Ziel. <br>Gemeinsam mit Dir wollen wir die verantwortlichen Ursachen für Deine Beschwerden finden.<br>
+Wir wollen, dass Du ein neues Körpergefühl bekommst und wieder so leben kannst, wie Du Dir das vorstellst.<br>
+Wir hören Dir zu, wir interessieren uns für Dich und würden uns freuen Dich kennenzulernen.<br><br>
+<a class="btn btn-small btn-transparent-dark-gray" href="mailto:praxis@chirofamily.de?subject=Terminanfrage%20Praxis%20CHIROfamily&amp;body=Bitte%20trage%20Deinen%20Namen%20und%20den%20gewünschten%20Termin%20ein:%0D%0A%0D%0AName:%20%20%0D%0ATermin:%20%20">Termin vereinbaren <i class="ti-arrow-right"></i></a></p>
+                               <div style="border:1px;    border-color: #333;
+    border-style: solid; border-radius:5px;
+    margin-top: 80px;
+    padding: 10px;
+    background: #efefef63; ">
+                                <h6 class="text-dark-gray margin-30px-bottom sm-margin-20px-bottom sans-font font-weight-600">Chiropraktik in Zeiten von Corona</h6>
+                                <p>Ein gut funktionierendes Nervensystem ist Grundvoraussetzung für ein intaktes Immunsystem. Zahlreiche Studien belegen, dass Menschen, die regelmäßig einen Chiropraktor besuchen, deutlich weniger Krankheitssymptome aufweisen. Eine Justierung Deiner Wirbelsäule ist ein Beitrag zu mehr Gesundheit.
+
+Das Infektionsrisiko wird in unserer Praxis durch folgende Maßnahmen minimiert:
+<ul style="margin-left: 20px;"><li>Einsatz von Desinfektionsmittel</li>
+<li>kurze Kontaktzeiten</li>
+<li>Verzicht auf Händeschütteln</li>
+<li>Das Tragen eines Mundschutzes</li></ul>
+
+
+</p></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="col-sm-12 col-sx-12">
+                                <img src="img/kreis2.jpg" width=300px>
+                            </div>
+                            <span class="text-small text-extra-light-gray">Urheber: Ringfoto Dockhorn, 79618 Rheinfelden</span>
+                            <span class="text-extra-dark-gray font-weight-500 display-block alt-font margin-10px-bottom margin-30px-top">Dr. med. Burak Esendal</span>
+
+                            <a class="btn btn-small btn-transparent-dark-gray popup-with-zoom-anim" href="#modal-esendal">Weitere Informationen <i class="ti-arrow-right"></i></a>
+                                <!-- start modal pop-up -->
+                                <div id="modal-esendal" class="zoom-anim-dialog mfp-hide col-lg-6 col-md-6 col-sm-7 col-xs-11 center-col bg-white text-center modal-popup-main padding-50px-all">
+                                    <span class="text-extra-dark-gray text-uppercase text-extra-large font-weight-500 margin-15px-bottom display-block text-left">Dr. med. Burak Esendal</span>
+                                    <div class="separator-line-horrizontal-full bg-extra-light-gray margin-60px-bottom margin-30px-top width-100"></div>
+                                    <p class="margin-four text-medium text-left">Ich kam in <a href="https://www.zofingen.ch" target="_blank">Zofingen (Schweiz)</a> auf die Welt. Schon im Gymnasium machte mir das Sezieren von Fischen in der Biologie viel Spaß. Das Interesse für die Naturwissenschaften war geboren. Nach meinem Medizinstudium in Basel habe ich mich für die Pharmazeutische Industrie entschieden. Nach fünf Jahren in einem kleinen Unternehmen und großen Konzern wollte ich zurück in die Klinik, um mich dem Wohlbefinden von Patienten zu widmen.</p>
+                                    <p class="margin-four text-medium text-left">Ich habe mir einen großen Traum erfüllt und Chiropraktik in Iowa, USA studiert. Nach dem erfolgreichen Abschluss am renommierten <a href="https://www.palmer.edu" target="_blank">Palmer College of Chiropractic</a> hat es mich in eine andere Ecke auf der Welt gezogen. Ich wollte als Pionier der Chiropraktik  in einem Krankenhaus  in Asien tätig sein. Mit der Zeit durfte ich an mehreren Talkshows im Fernsehen teilnehmen und konnte Bekanntschaften machen, von welchen ich niemals zu träumen gewagt hätte. 2014 habe ich den Schritt gewagt und eine Teilzeitpraxis eröffnet.</p>
+                                    <p class="margin-four text-medium text-left">2016 habe ich das Krankenhaus verlassen und mich nur noch auf die Praxistätigkeit konzentriert. Nach fast 7 Jahren im Ausland wollte ich wieder zurück zu meinen Wurzeln und habe mich entschieden, die Amerikanische Chiropraktik im Dreiländereck zu verbreiten.</p>
+                                    <ul class="list-style-1 text-medium text-left">
+                                        <li>Jährliche Teilnahme an den ChiroEurope Kongressen seit 2015</li>
+                                        <li>Persönliches Coaching auf verschiedensten Ebenen seit 2014</li>
+                                        <li>National Board Lizenzierung in Chiropraktik (lizensiert in Pennsylvania, USA), 2010</li>
+                                        <li>Weitere Ausbildung in der Gonstead Technik, Wepner Chiropractic Clinic, Berlin, Wisconsin, USA, März – Juni 2010</li>
+                                        <li>Ausbilder von jüngeren Chiropraktikstudenten in der Troxell-Klinik, Eldridge, Iowa, USA, 2009-2010</li>
+                                        <li>Spezialisiert auf die Gonstead Technik seit 2008</li>
+                                        <li>Doktor der Chiropraktik, Studiengang – Palmer College of Chiropractic, Davenport, Iowa, USA, 2008 – 2010</li>
+                                        <li>Doktorarbeit: Universitätsspital Basel, Departement für Kardiologie, 2004</li>
+                                        <li>Doktor der Medizin – Universitätsspital Basel, 1995 – 2002</li>
+                                    </ul>
+                                    <a class="btn btn-medium btn-dark-gray popup-modal-dismiss" href="#">Schliessen</a>
+                                </div>
+                                <!-- end modal pop-up -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-12 col-sm-12 col-sx-12">
+                            <div class="bg-white padding-40px-all no-padding-bottom xs-padding-30px-all last-paragraph-no-margin text-medium text-extra-dark-gray sans-font">
+                                <div class="text_inner"><p style="padding-bottom: 0 !important;text-align: center;">Du bist in <a href="https://www.chirofamily.de/chiropraktiker-basel/" target="_blank" rel="noopener">Basel</a><a title="Chiropraktiker Basel" href="https://chirofamily.de/chiropraktiker-basel/" target="_blank" rel="noopener">, </a><a href="https://www.chirofamily.de/chiropraktiker-pratteln/" target="_blank" rel="noopener">Pratteln, </a><a href="https://www.chirofamily.de/chiropraktiker-liestal/" target="_blank" rel="noopener">Liestal, </a><a href="https://www.chirofamily.de/chiropraktiker-muttenz/" target="_blank" rel="noopener">Muttenz, </a><a href="https://www.chirofamily.de/chiropraktiker-riehen/" target="_blank" rel="noopener">Riehen</a>, <a href="https://www.chirofamily.de/chiropraktiker-weil-am-rhein/" target="_blank" rel="noopener">Weil am Rhein</a>&nbsp;oder <a href="https://www.chirofamily.de/chiropraktiker-bad-saeckingen/" target="_blank" rel="noopener">Bad Säckingen, </a><a href="https://www.chirofamily.de/chiropraktiker-grenzach-wyhlen/" target="_blank" rel="noopener">Grenzach-Wyhlen</a>&nbsp;und Du suchst nach einem&nbsp;<a href="https://www.chirofamily.de/" target="_blank" rel="noopener">Chiropraktiker</a>? Hier <a title="Kontakt CHIROfamily" href="https://chirofamily.de/kontakt/" target="_blank" rel="noopener">kontaktierst Du</a> mich!</p>
+                                    <h4 style="text-align: center;"><a title="Dr. med. Burak Esendal" href="https://www.chirofamily.de/esendal/" target="_blank" rel="noopener"><span style="text-decoration: underline; color: #008000;">Wer bin ich?</span></a></h4>
+                                    </div>
+                            </div>
+                            <div class="et_pb_module et_pb_cta_0 et_pb_promo  et_pb_text_align_center et_pb_bg_layout_dark">
+				
+				
+                                <div class="et_pb_promo_description"><h4 class="et_pb_module_header">Chiropraktiker in Lörrach und Umgebung</h4><div><p>Ich würde mich freuen, Dich bald bei mir in der Praxis begrüßen zu dürfen.</p></div></div>
+                                <div class="et_pb_button_wrapper"><a class="btn-5" href="mailto:praxis@chirofamily.de">Termin Buchen</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end column -->
+                </div>
+                <div class="padding-20px-bottom">&nbsp;</div>
+            </div>
+        </section>
+        <!-- end  section -->
+
+
+        <!-- start member section-->
+        <section style="padding: 0 !important;" class="bg-white wow fadeIn" id="vitchiro">
+            <div class="container">
+                <div class="row">
+                    <!-- start column -->
+                    <div class="col-md-12">
+                        <div class="padding-40px-all xs-padding-30px-all last-paragraph-no-margin text-medium text-extra-dark-gray sans-font">
+                            <h3 style="font-weight: 600;font-size: 45px;" class="text-dark-gray margin-10px-bottom sm-margin-20px-bottom sans-font font-weight-600">Mitgliedschaften</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white padding-40px-all xs-padding-30px-all last-paragraph-no-margin text-medium text-extra-dark-gray sans-font">
+                            <p><a href="https://dagc.de" target="_blank"><img src="img/DAGC-Logo-700.gif" width="250px"></a></p>
+                            <p class="text-medium line-height-24">Deutsch-Amerikanische Gesellschaft für<br>Chiropraktik e. V. (DAGC)<br>Kitschburger Straße 236<br>50933 Köln<br><a href="https://dagc.de" target="_blank">www.dagc.de</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="bg-white padding-40px-all no-padding-bottom xs-padding-30px-all last-paragraph-no-margin text-medium text-extra-dark-gray sans-font">
+                            <p class="padding-10px-top"><a href="https://gonstead.com" target="_blank"><img src="img/gonstead-logo.png" width="250px"></a></p>
+                            <p class="text-medium line-height-24">Gonstead Clinical Studies Society<br>1280 17th Avenue, Suite 101<br>Santa Cruz, CA 95062<br>Vereinigte Staaten von Amerika (USA)<br><a href="https://gonstead.com" target="_blank">www.gonstead.com</a></p>
+                            <p><span class="text-small"><span class="font-weight-600">Hinweis:</span> Der vorstehende Link leitet Dich direkt zur amerikanischen Seite der Gonstead Clinical Studies Society. Wenn Du diesen Link oder das Logo anklickst, erklärst Du Dich ausdrücklich damit einverstanden, dass Deine Daten direkt an die amerikanischen Server übertragen werden.</span><br></p>
+                        </div>
+                    </div>
+                    <!-- end column -->
+                </div>
+            </div>
+        </section>
+        <!-- end member section -->
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 padding-40px-all no-padding-top">
+                    <div class="separator-line-horrizontal-full bg-extra-light-gray margin-10px-bottom width-100"></div>
+                    <p class="text-small-med font-weight-600 margin-three-top">Heilversprechen und Heilmittelwerbegesetz</p>
+                    <p class="text-small-med">Wir weisen aus rechtlichen Gründen ganz besonders darauf hin, dass bei keiner der aufgeführten Leistungen der Praxis <a href="index.html">CHIROfamily</a> der Eindruck erweckt wird, dass hier ein Heilungsversprechen zugrunde liegt bzw. Linderung oder Verbesserung eines Krankheitszustandes garantiert oder versprochen wird.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- start footer -->
+        <footer class="footer-modern-dark bg-custom-blue  xs-padding-30px-tb">
+            <div class="footer-widget-area padding-40px-bottom xs-padding-30px-bottom">
+                <div class="container">
+                    <div class="row table-f">
+                      
+                        <div class="col-md-6">
+                            <div style="margin-bottom: 25px;">
+                             <div class="text_inner_f"><p>Sprechzeiten</p></div>
+                            <div>
+                                <table class="table" border="1" style="width: 100%; border-collapse: collapse; border-style: none;">
+                                    <tbody>
+                                    <tr>
+                                    <td style="width: 100%;"><strong>Neue Öffnungszeiten:</strong></td>
+                                    </tr>
+                                    <tr>
+                                    <td style="width: 100%;"><span style="font-size: 20px;">(gültig ab 03.01.2022)</span></td>
+                                    </tr>
+                                    </tbody>
+                                    </table>
+                             <div class="et_pb_text_inner">
+                        <table class="table" style="width: 100%; border-collapse: collapse; margin-left: auto; margin-right: auto;" border="1">
+                        <tbody>
+                        <tr>
+                        <td style="width: 33.333333333333336%; text-align: center;">Montag:</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;Vormittag geschlossen</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">16:00 - 18:30</td>
+                        </tr>
+                        <tr>
+                        <td style="width: 33.333333333333336%; text-align: center;">Dienstag:</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;8:30 - 12:00</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;16:00 - 18:30</td>
+                        </tr>
+                        <tr>
+                        <td style="width: 33.333333333333336%; text-align: center;">Mittwoch:</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">8:30 - 12:00</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;16:00 - 18:30</td>
+                        </tr>
+                        <tr>
+                        <td style="width: 33.333333333333336%; text-align: center;">Donnerstag:</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">8:30 - 12:00</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;16:00 - 18:30</td>
+                        </tr>
+                        <tr>
+                        <td style="width: 33.333333333333336%; text-align: center;">Freitag:</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">Vormittag geschlossen</td>
+                        <td style="width: 33.333333333333336%; text-align: center;">&nbsp;16:00 - 18:30</td>
+                        </tr>
+                        </tbody>
+                        </table></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1"> </div>
+                        <div class="col-md-5">
+                            <div>
+                                <div>
+                                <div class="text_inner_f"><p>Kontakt</p></div>
+                                <div class="text-2"><p>Während den Sprechzeiten kannst Du uns unter folgender Nummer erreichen: <a href="tel:004976237479900">+49 7623 747 99 00</a></p></div>
+                            </div><div>
+                                
+                                
+                                <div class="text-2"><p>Adresse:<br>Praxis CHIROfamily<br>Dr. med. Burak Esendal<br>Kapuzinerstr. 5<br>79618 Rheinfelden (Baden)<br>Email: <a href="mailto: praxis@chirofamily.de">praxis@chirofamily.de</a></p>
+                            <p>Eine Anfahrtsbeschreibung findest du&nbsp;<a href="https://www.google.de/maps/place/Kapuzinerstraße+5,+79618+Rheinfelden+(Baden)/@47.5590847,7.7816842,16z/data=!4m5!3m4!1s0x4791b492b430f4e1:0xd98bf4b54dbd3794!8m2!3d47.5590811!4d7.7860669?shorturl=1" target="_blank" rel="noopener">hier</a>.</p></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- start copyright -->
+                    <div class="footer-bottom padding-40px-top xs-padding-30px-top">
+                        <div class="row margin-20px-bottom imprint2">
+                            <div class="col-md-12 col-sm-12 center-col text-center">
+                                <a href="https://www.facebook.com/CHIROfamily-1307458592636527/" target="_blank" class="btn social-icon social-icon-large icon-extra-large button text-extra-large-custom text-white no-margin-right"><i class="fa fa-facebook-square"></i></a>
+                                <a href="https://www.instagram.com/chirofamily_rheinfelden/" target="_blank" class="btn social-icon social-icon-large button text-extra-large-custom text-white no-margin-right"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.youtube.com/channel/UC5RbcMGuDVwCDV9P6BCP_PA/featured" target="_blank" class="btn social-icon social-icon-large button text-extra-large-custom text-white no-margin-right"><i class="fa fa-youtube"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12 col-xs-12 text-left text-small xs-text-center text-white">&copy; CHIROfamily - Dr. med. Burak Esendal</div>
+                            <div class="col-md-8 col-sm-12 col-xs-12 text-right text-small xs-text-center text-white imprint"><a href="#top" class="inner-link">Impressum</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="datenschutzerklaerung.html">Datenschutzerklärung</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="kontakt.html" class="inner-link">Kontakt &amp; Anfahrt</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="mailto:praxis@chirofamily.de?subject=Email Anfrage" title="Termin">Email Anfrage</a>
+                            <br>
+                            <a href="./basel.html">Basel</a>&nbsp;&nbsp;
+                            <a href="./bad-saeckingen.html">Bad Säckingen</a>&nbsp;&nbsp;
+                            <a href="./pratteln.html">Pratteln</a>&nbsp;&nbsp;
+                            <a href="./grenzach-wyhlen.html">Grenzach-Wyhlen</a>&nbsp;&nbsp;
+                            <a href="./muttenz.html">Muttenz</a>&nbsp;&nbsp;
+                            <a href="./liestal.html">Liestal</a>&nbsp;&nbsp;
+                            <a href="./weil-am-rhein.html">Weil-am-Rhein</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end copyright -->
+                </div>
+            </div>
+        </footer>
+        <!-- end footer -->
+
+        <!-- start scroll to top -->
+        <a class="scroll-top-arrow" href="javascript:void(0);"><i class="ti-arrow-up"></i></a>
+        <!-- end scroll to top  -->
+        <!-- javascript libraries -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/modernizr.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+        <script type="text/javascript" src="js/skrollr.min.js"></script>
+        <script type="text/javascript" src="js/smooth-scroll.js"></script>
+        <script type="text/javascript" src="js/jquery.appear.js"></script>
+        <!-- menu navigation -->
+        <script type="text/javascript" src="js/bootsnav.js"></script>
+        <script type="text/javascript" src="js/jquery.nav.js"></script>
+        <!-- animation -->
+        <script type="text/javascript" src="js/wow.min.js"></script>
+        <!-- page scroll -->
+        <script type="text/javascript" src="js/page-scroll.js"></script>
+        <!-- swiper carousel -->
+        <script type="text/javascript" src="js/swiper.min.js"></script>
+        <!-- counter -->
+        <script type="text/javascript" src="js/jquery.count-to.js"></script>
+        <!-- parallax -->
+        <script type="text/javascript" src="js/jquery.stellar.js"></script>
+        <!-- magnific popup -->
+        <script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
+        <!-- portfolio with shorting tab -->
+        <script type="text/javascript" src="js/isotope.pkgd.min.js"></script>
+        <!-- images loaded -->
+        <script type="text/javascript" src="js/imagesloaded.pkgd.min.js"></script>
+        <!-- pull menu -->
+        <script type="text/javascript" src="js/classie.js"></script>
+        <script type="text/javascript" src="js/hamburger-menu.js"></script>
+        <!-- counter  -->
+        <script type="text/javascript" src="js/counter.js"></script>
+        <!-- fit video  -->
+        <script type="text/javascript" src="js/jquery.fitvids.js"></script>
+        <!-- equalize -->
+        <script type="text/javascript" src="js/equalize.min.js"></script>
+        <!-- skill bars  -->
+        <script type="text/javascript" src="js/skill.bars.jquery.js"></script>
+        <!-- justified gallery  -->
+        <script type="text/javascript" src="js/justified-gallery.min.js"></script>
+        <!--pie chart-->
+        <script type="text/javascript" src="js/jquery.easypiechart.min.js"></script>
+        <!-- instagram -->
+        <script type="text/javascript" src="js/instafeed.min.js"></script>
+        <!-- retina -->
+        <script type="text/javascript" src="js/retina.min.js"></script>
+        <!-- revolution -->
+        <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
+        <!-- revolution slider extensions (load below extensions JS files only on local file systems to make the slider work! The following part can be removed on server for on demand loading) -->
+        <!--<script type="text/javascript" src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.migration.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
+        <!-- setting -->
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
